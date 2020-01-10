@@ -1,0 +1,35 @@
+<?php $session  =   $this->session->get('auth-psslai'); ?>
+<div class="sidebar-inner c-overflow">
+    <ul class="main-menu">
+        <li><a data-ui-sref-active="" data-ui-sref="home" data-ng-click="toggleChildAccordion($event);" data-current-skin="{{ sideMenu.child == 'home' ? skin : '' }}"><i class="zmdi zmdi-home"></i> DASHBOARD</a></li>
+        <li><a data-ui-sref-active="" data-ui-sref="inventory.list" data-ng-click="toggleChildAccordion($event);" data-current-skin="{{ sideMenu.child == 'inventory' ? skin : '' }}"><i class="zmdi zmdi-format-list-bulleted"></i> INVENTORY</a></li>
+        
+        <li class="sub-menu" data-ng-class="{ 'active toggled': uxctrl.$state.includes('transaction') || sideMenu.parent == 'transaction' }" ng-click="toggleAccordion($event);">
+            <a href="" toggle-submenu><i class="zmdi zmdi-settings"></i>TRANSACTIONS</a>
+            <ul>
+                <li><a data-ui-sref-active="" data-ui-sref="transaction.pos" data-ng-click="toggleChildAccordion($event);" data-current-skin="{{ sideMenu.child == 'pos' ? skin : '' }}"><i class="zmdi zmdi-case"></i> POS</a></li>
+            </ul>
+        </li>
+
+
+        <li ng-if="userRole.access.view" class="sub-menu" data-ng-class="{ 'active toggled': uxctrl.$state.includes('users') || sideMenu.parent == 'user_setup' }" ng-click="toggleAccordion($event);">
+            <a href="" toggle-submenu><i class="zmdi zmdi-accounts-alt"></i>USER SETUP</a>
+            <ul>
+                <li><a data-ui-sref-active="" data-ui-sref="users.roles" data-ng-click="toggleChildAccordion($event);" data-current-skin="{{ sideMenu.child == 'user_roles' ? skin : '' }}"><i class="zmdi zmdi-case"></i> User Roles</a></li>
+                <li><a data-ui-sref-active="" data-ui-sref="users.users" data-ng-click="toggleChildAccordion($event);" data-current-skin="{{ sideMenu.child == 'user' ? skin : '' }}"><i class="zmdi zmdi-case"></i> User</a></li>
+            </ul>
+        </li>
+
+
+        <li class="sub-menu" data-ng-class="{ 'active toggled': uxctrl.$state.includes('settings') || sideMenu.parent == 'settings' }" ng-click="toggleAccordion($event);">
+            <a href="" toggle-submenu><i class="zmdi zmdi-settings"></i>SETTINGS</a>
+            <ul>
+                <li><a data-ui-sref-active="" data-ui-sref="settings.category" data-ng-click="toggleChildAccordion($event);" data-current-skin="{{ sideMenu.child == 'category' ? skin : '' }}"><i class="zmdi zmdi-case"></i> Category</a></li>
+                <li><a data-ui-sref-active="" data-ui-sref="settings.brand" data-ng-click="toggleChildAccordion($event);" data-current-skin="{{ sideMenu.child == 'brand' ? skin : '' }}"><i class="zmdi zmdi-case"></i> Brand</a></li>
+                <li><a data-ui-sref-active="" data-ui-sref="settings.customer" data-ng-click="toggleChildAccordion($event);" data-current-skin="{{ sideMenu.child == 'customer' ? skin : '' }}"><i class="zmdi zmdi-case"></i> Customer</a></li>
+                <li><a data-ui-sref-active="" data-ui-sref="settings.unit" data-ng-click="toggleChildAccordion($event);" data-current-skin="{{ sideMenu.child == 'unit' ? skin : '' }}"><i class="zmdi zmdi-case"></i> Unit</a></li>
+
+            </ul>
+        </li>
+    </ul>
+</div>

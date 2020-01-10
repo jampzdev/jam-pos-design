@@ -1,0 +1,147 @@
+
+<div class="container" data-ng-controller="TransactionCtrl as cCtrl" ng-init="OnInit();getInventory();getCartList();">
+    <div class="block-header p-l-0" style="margin-right: -12px;">
+        <h2><b>POS</b></h2>
+
+        <ul class="actions">
+            <li>
+
+            </li>
+            <li title="Refresh">
+                <button class="btn bgm-blue" ng-click="transactSales()">Proceed</button>
+            </li>
+        </ul>
+    </div>
+
+    <div class="row">
+
+        <div class="col-sm-8">
+            <div class="card-header bgm-blue">
+                <h2>Inventory</h2>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <div class="form-group">
+                        <div class="fg-line">
+                            <input type="text" placeholder="Search" ng-change="getInventory()" ng-model="inventory_search" class="input-sm form-control seach-module" maxlength="50">
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body table-responsive">
+                    <table ng-table="inventoryTable" class="table table-display-inline table-vmiddle">
+                        <thead>
+                            <tr>
+                                <th> ITEM NAME</th>
+                                <th> BRAND </th>
+                                <th> CATEGORY </th>
+                                <th> PRICE </th>
+                                <th> QTY </th>
+                            </tr>
+                        </thead>
+                        <!-- <tr ng-repeat="list in users | orderBy: 'complete_name'"> -->
+                        <tr ng-repeat="list in inventoryList" ng-click=pushToArray(list)>
+                            <td>
+                                <div class="p-t-2" ng-style="{width:'100%'}">
+                                    <b>{{ list.item_name }}</b> <br>
+                                    <span style="color:gray">{{ list.item_desc }} </span>
+                                </div>
+                            </td>
+                            <td>
+                                {{ list.brand_name }} 
+                            </td>
+                            <td>
+                                {{ list.category_name }} 
+                            </td>
+                            <td>
+                                {{ list.price }} 
+                            </td>
+                            <td>
+                                {{ list.qty }} 
+                            </td>
+                        </tr>
+                        <tr ng-if="inventoryList.length == 0">
+                            <td colspan="7" ><center>No record(s) found</center></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    
+        <div class="col-sm-4">
+            <div class="col-sm-12">
+                <div class="card-header bgm-blue">
+                    <h2>Cart List</h2>
+                </div>
+                <div class="card">
+                    <div class="card-body table-responsive">
+                        <table ng-table="cartTable" class="table table-display-inline table-vmiddle">
+                            <tr>
+                                <th>ITEM NAME</th>
+                                <!-- <th>BRAND</th>
+                                <th>CATEGORY</th> -->
+                                <th>PRICE</th>
+                                <th>QTY</th>
+        
+                                <th>TOTAL PRICE</th>
+                            </tr>
+        
+                            <tr ng-repeat="list in transaction.cart_list">
+                                <td>{{ list.item_name }}</td>
+                                <!-- <td>{{ list.brand_name }}</td>
+                                <td>{{ list.category_name }}</td> -->
+                                <td>{{ list.price }}</td>
+                                <td>{{ list.qty }}</td>
+                                <td>{{ list.total_price }}</td>
+                            </tr>
+        
+                            <tr ng-if="transaction.cart_list.length==0">
+                                <td colspan="4"><center> Cart list is empty.</center></td>
+                            </tr>
+                            <tfoot ng-if="transaction.cart_list.length!=0">
+                                <tr>
+                                    <td colspan="3" align="right">Total Price : </td>
+                                    <td colspan="1"><span class="total_price pull-right">{{ transaction.total_price }}</span></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-12">
+
+                <div class="card">
+                    <div class="card-header bgm-blue">
+                        <h2>Sales Details</h2>
+                    </div>
+                    <div class="card-body card-padding">
+                        <div class="form-group m-b-5">
+                            <div id="completeNameContainer" class="fg-line" >
+                                <label style="z-index:1024;">Customer
+                                    <span class="c-red">*</span>
+                                </label>
+                                <select class="form-control" ng-model="transaction.customer"  >
+                                <option disabled>SELECT A CUSTOMER</option>
+
+                                    <option ng-repeat="d in customer_list" value="{{ d.key }}">{{ d.fullname }}</option>
+                                </select>
+                                
+                            </div>
+                        </div>
+
+                        <div class="form-group m-b-5">
+                            <div id="completeNameContainer" class="fg-line" >
+                                <label style="z-index:1024;">Discount
+                                    <span class="c-red">*</span>
+                                </label>
+                                <input id="unit_name" class="form-control bgm-white p-l-5" type="text" ng-model="transaction.discount" maxlength="50" placeholder="Discount">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
